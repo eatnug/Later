@@ -1,0 +1,26 @@
+#bookmarks__container{
+    widows: 100vh;;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+.buttons__container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100vh;
+}
+.bookmark{
+    width: 100vh;
+    height: 50px;
+    border: 1px solid darkgray;
+    margin-top: 5px;
+}
+
+.bookmark > p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90vh;
+    margin: 5px;
+}
