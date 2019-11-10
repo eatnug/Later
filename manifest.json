@@ -1,25 +1,14 @@
 {
   "manifest_version": 2,
   "name": "Later",
-  "description": "Print Hello, World! message",
+  "description": "Save it and watch later!",
   "version": "1.0.0",
-  "commands": {
-    "_execute_browser_action": {
-      "suggested_key": {
-        "default": "Alt+Shift+M"
-      },
-      "description": "Opens hello.html"
-    }
+  "permissions": ["tabs", "storage"],
+  "background": {
+    "scripts": ["init.js"],
+    "persistent": false
   },
-  "permissions": ["tabs", "<all_urls>", "storage"],
-  "content_scripts":[
-      {
-          "matches":["<all_urls>"],
-          "js": ["content.js"]
-      }
-  ],
-  "browser_action":{
-      "default_popup":"popup.html",
-      "default_title":"bear"
+  "browser_action": {
+    "default_popup": "popup.html"
   }
 }
