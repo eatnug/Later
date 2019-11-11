@@ -1,5 +1,5 @@
 #bookmarks__container{
-    widows: 100vh;;
+    widows: 200px;;
     display: flex;
     flex-direction: column;
     margin-bottom: 5px;
@@ -8,10 +8,10 @@
     display: flex;
     flex-direction: row;
     justify-content: center;
-    width: 100vh;
+    width: 200px;
 }
 .bookmark{
-    width: 100vh;
+    width: 180px;
     height: 50px;
     border: 1px solid darkgray;
     margin-top: 5px;
@@ -21,6 +21,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 90vh;
+    width: 170px;
     margin: 5px;
 }

@@ -1,5 +1,4 @@
 const save = document.getElementById("button__save");
-const saveWT = document.getElementById("button__saveWT");
 const load = document.getElementById("button__load");
 const bookmarks__container = document.getElementById("bookmarks__container");
 const q = document.getElementById("search__box");
@@ -16,7 +15,14 @@ const makeElem = item => {
   tags.classList.add("bookmark__tags");
   div.appendChild(title);
   div.appendChild(tags);
-  div.onclick = () => chrome.tabs.create({ url: item.url });
+  div.onclick = () => {
+    chrome.storage.sync.get(["list"], items => {
+      chrome.storage.sync.set({"list": items.list.filter(cur => cur.url != item.url)}, () => {
+        chrome.tabs.create({ url: item.url })
+        location.href=""
+      })
+    });
+  };
   return div;
 };
 
@@ -30,19 +36,8 @@ save.onclick = () => {
   chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
     chrome.storage.sync.get(["list"], items => {
       if (!items.list.filter(cur => cur.url === tabs[0].url).length) {
-        chrome.storage.sync.set({ list: [...items.list, { title: tabs[0].title, url: tabs[0].url, isRead: false, tags: [] }] });
-        location.href = "";
-      }
-    });
-  });
-};
-
-saveWT.onclick = () => {
-  chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
-    chrome.storage.sync.get(["list"], items => {
-      if (!items.list.filter(cur => cur.url === tabs[0].url).length) {
         const tags = prompt("태그를 입력하세요. ex)태그1,태그2").split(",");
-        chrome.storage.sync.set({ list: [...items.list, { title: tabs[0].title, url: tabs[0].url, isRead: false, tags }] });
+        chrome.storage.sync.set({ list: [{ title: tabs[0].title, url: tabs[0].url, isRead: false, tags, id: items.list.length }, ...items.list] });
         location.href = "";
       }
     });
@@ -64,3 +59,8 @@ search.onclick = () => {
     });
   }
 };
+
+q.addEventListener("keyup", e => {
+  if(!q.value.trim().length) location.href=""
+  else if(e.key == 'Enter') search.click()
+});
