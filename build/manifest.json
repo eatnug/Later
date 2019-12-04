@@ -1,0 +1,19 @@
+{
+  "name": "Later",
+  "version": "1.0",
+  "manifest_version": 2,
+  "browser_action": {},
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["inject.js"],
+      "all_frames":true
+    }
+  ],
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": true
+  },
+  "web_accessible_resources": ["index.html","utils.js"],
+  "permissions": ["activeTab","storage"]
+}

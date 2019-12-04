@@ -1,1 +1,1 @@
-Chrome extension to save links to watch later
+React Chrome Extension created using boilerplate (chromex-react)[https://github.com/EatNug/chromex-react]
